@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Slot, Transaction, SavingsGoal } from './types';
+import { Slot, Transaction, SavingsGoal, UserProfile } from './types';
 import { generateSlotsForTarget } from './utils';
 import { supabase } from './lib/supabase';
 import { User } from '@supabase/supabase-js';
@@ -15,8 +15,10 @@ interface SavingsContextType {
   filter: 'all' | 'pending' | 'completed';
   isLoading: boolean;
   user: User | null;
+  profile: UserProfile | null;
   setFilter: (filter: 'all' | 'pending' | 'completed') => void;
   signOut: () => Promise<void>;
+  upgradeToPremium: () => Promise<void>;
 
   // Actions
   addGoal: (name: string, targetAmount: number) => Promise<void>;
@@ -31,6 +33,7 @@ const SavingsContext = createContext<SavingsContextType | undefined>(undefined);
 
 export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [goals, setGoals] = useState<SavingsGoal[]>([]);
   const [activeGoalId, setActiveGoalId] = useState<string | null>(() => {
     return localStorage.getItem('active_goal_id') || null;
@@ -50,6 +53,7 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
       setUser(session?.user ?? null);
       if (!session) {
         setGoals([]);
+        setProfile(null);
         setActiveGoalId(null);
         setIsLoading(false);
       }
@@ -99,6 +103,23 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
       if (!activeGoalId && formattedGoals.length > 0) {
         setActiveGoalId(formattedGoals[0].id);
       }
+
+      // 2. Fetch Profile
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+      } else {
+        setProfile({
+          id: profileData.id,
+          email: profileData.email,
+          plan: profileData.plan
+        });
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -138,6 +159,13 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
   // Actions
   const addGoal = async (name: string, targetAmount: number) => {
     if (!user) return;
+
+    // Enforce 1-goal limit for free users
+    if (profile?.plan === 'free' && goals.length >= 1) {
+      alert("A versão gratuita é limitada a 1 meta. Faça upgrade para o Plano Premium para criar metas ilimitadas!");
+      return;
+    }
+
     try {
       // 1. Insert goal (user_id will be handled by trigger or manually)
       const { data: newGoalData, error: goalError } = await supabase
@@ -263,6 +291,21 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
     await supabase.auth.signOut();
   };
 
+  const upgradeToPremium = async () => {
+    if (!user) return;
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ plan: 'premium' })
+        .eq('id', user.id);
+
+      if (error) throw error;
+      await fetchData();
+    } catch (error) {
+      console.error('Error upgrading to premium:', error);
+    }
+  };
+
   return (
     <SavingsContext.Provider value={{
       goals,
@@ -275,8 +318,10 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
       filter,
       isLoading,
       user,
+      profile,
       setFilter,
       signOut,
+      upgradeToPremium,
       addGoal,
       editGoal,
       selectGoal,

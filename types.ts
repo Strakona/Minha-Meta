@@ -22,6 +22,12 @@ export interface SavingsGoal {
   themeColor?: string; // Optional for future UI enhancements
 }
 
+export interface UserProfile {
+  id: string;
+  email: string;
+  plan: 'free' | 'premium';
+}
+
 export interface AppState {
   goals: SavingsGoal[];
   activeGoalId: string | null;

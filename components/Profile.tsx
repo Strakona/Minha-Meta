@@ -47,7 +47,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
 const Profile: React.FC = () => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { user, signOut } = useSavings();
+  const { user, profile, signOut, upgradeToPremium } = useSavings();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Profile State
@@ -163,9 +163,25 @@ const Profile: React.FC = () => {
             </div>
             <div className="bg-background-light dark:bg-background-dark p-3 rounded-xl transition-colors duration-200">
               <p className="text-xs text-subtext-light dark:text-subtext-dark">Plano</p>
-              <p className="font-bold text-orange-500">Gratuito</p>
+              <p className={`font-bold ${profile?.plan === 'premium' ? 'text-purple-500' : 'text-orange-500'} capitalize`}>
+                {profile?.plan || 'Gratuito'}
+              </p>
             </div>
           </div>
+
+          {profile?.plan === 'free' && (
+            <button
+              onClick={() => {
+                if (window.confirm("Deseja simular o upgrade para o Plano Premium e criar metas ilimitadas?")) {
+                  upgradeToPremium();
+                }
+              }}
+              className="mt-6 w-full py-3 bg-gradient-to-r from-purple-600 to-primary text-white font-bold rounded-xl shadow-lg shadow-purple-500/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2 group"
+            >
+              <span className="material-icons-round text-lg animate-pulse">auto_awesome</span>
+              Upgrade para Premium
+            </button>
+          )}
         </div>
 
         {/* Settings Group 1 */}
