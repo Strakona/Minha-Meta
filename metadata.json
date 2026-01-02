@@ -1,0 +1,5 @@
+{
+  "name": "Minha Meta",
+  "description": "A savings goal tracker allowing users to manage deposits towards a 31,000 BRL goal via a slot-based system.",
+  "requestFramePermissions": []
+}
