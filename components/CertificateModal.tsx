@@ -88,7 +88,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ goalName, totalAmou
                             <div className="w-full border-t border-white/10 my-4"></div>
 
                             <p className="text-gray-400 text-xs uppercase tracking-widest mb-1">Objetivo Alcançado</p>
-                            <h2 className="text-2xl font-bold mb-4 text-white line-clamp-2 px-4">{goalName}</h2>
+                            <h2 className="text-2xl font-bold mb-4 text-white px-4 pb-1 break-words w-full">{goalName}</h2>
 
                             <div className="bg-white/10 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/5">
                                 <p className="text-xs text-gray-400 mb-1">Valor Total Acumulado</p>
