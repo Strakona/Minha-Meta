@@ -72,7 +72,8 @@ export const SavingsProvider: React.FC<{ children: React.ReactNode }> = ({ child
   // Fetch data from Supabase
   const fetchData = async () => {
     if (!user) return;
-    setIsLoading(true);
+    // Don't set loading true here to avoid unmounting components during updates
+    // setIsLoading(true); 
     try {
       const { data: goalsData, error: goalsError } = await supabase
         .from('goals')
