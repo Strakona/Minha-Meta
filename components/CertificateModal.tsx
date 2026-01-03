@@ -104,7 +104,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ goalName, totalAmou
                                     <span key={i} className="material-icons-round text-yellow-500 text-xs">star</span>
                                 ))}
                             </div>
-                            <p className="text-[10px] text-primary/80 font-medium mt-3 tracking-wide">minhameta.app</p>
+                            <p className="text-[10px] text-primary/80 font-medium mt-3 tracking-wide">minha-meta-chi.vercel.app</p>
                         </div>
                     </div>
                 </div>
