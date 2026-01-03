@@ -18,6 +18,10 @@ body {
   display: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
   scrollbar-width: none;
   -ms-overflow-style: none;

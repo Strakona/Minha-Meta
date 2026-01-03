@@ -35,7 +35,7 @@ const Auth: React.FC = () => {
                 {/* Logo/Icon */}
                 <div className="flex justify-center mb-8">
                     <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/20 transform hover:scale-110 transition-transform duration-300">
-                        <span className="material-icons-round text-white text-4xl">rocket_launch</span>
+                        <span className="material-icons-round text-white text-4xl">savings</span>
                     </div>
                 </div>
 

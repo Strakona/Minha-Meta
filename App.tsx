@@ -7,7 +7,7 @@ import History from './components/History';
 import Analytics from './components/Analytics';
 import Profile from './components/Profile';
 import BottomNav from './components/BottomNav';
-import WelcomeScreen from './components/WelcomeScreen';
+import LandingPage from './components/LandingPage';
 import GoalSelection from './components/GoalSelection';
 import Auth from './components/Auth';
 
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     <ThemeProvider>
       <SavingsProvider>
         {showWelcome ? (
-          <WelcomeScreen onDismiss={() => setShowWelcome(false)} />
+          <LandingPage onStart={() => setShowWelcome(false)} />
         ) : (
           <Router>
             <NavigationHandler>
