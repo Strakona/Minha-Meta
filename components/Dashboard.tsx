@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import html2canvas from 'html2canvas'; // Import to ensure type availability if explicit usage elsewhere
+import CertificateModal from './CertificateModal';
 import { useNavigate } from 'react-router-dom';
 import { useSavings } from '../context';
 import { formatCurrency } from '../utils';
@@ -14,6 +16,7 @@ const Dashboard: React.FC = () => {
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
+  const [showCertificate, setShowCertificate] = useState(false);
 
   // Reset pagination and modal when filter or goal changes
   useEffect(() => {
@@ -94,6 +97,13 @@ const Dashboard: React.FC = () => {
       undoPayment(selectedSlot.id);
     } else {
       markAsPaid(selectedSlot.id);
+
+      // Check if this action completes the goal
+      const newTotalSaved = totalSaved + selectedSlot.value;
+      // We use a small epsilon for float comparison or just check if >=
+      if (newTotalSaved >= totalGoal * 0.999) {
+        setShowCertificate(true);
+      }
     }
     setSelectedSlot(null);
   };
@@ -279,8 +289,8 @@ const Dashboard: React.FC = () => {
             <button
               onClick={handleModalAction}
               className={`w-full py-3.5 rounded-xl font-bold text-white shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-2 ${selectedSlot.status === 'paid'
-                  ? 'bg-red-500 hover:bg-red-600 shadow-red-500/30'
-                  : 'bg-primary hover:bg-blue-600 shadow-blue-500/30'
+                ? 'bg-red-500 hover:bg-red-600 shadow-red-500/30'
+                : 'bg-primary hover:bg-blue-600 shadow-blue-500/30'
                 }`}
             >
               <span className="material-icons-round">
@@ -311,6 +321,14 @@ const Dashboard: React.FC = () => {
           <span className="material-icons-round text-2xl">add</span>
         </button>
       </div>
+      {/* Certificate Modal */}
+      {showCertificate && (
+        <CertificateModal
+          goalName={activeGoal.name}
+          totalAmount={totalGoal}
+          onClose={() => setShowCertificate(false)}
+        />
+      )}
     </div>
   );
 };

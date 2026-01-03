@@ -147,7 +147,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                             <h2 className="text-3xl font-bold mb-4">Por que usar o Minha Meta?</h2>
                             <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
                         </div>
-                        <div className="grid md:grid-cols-3 gap-8">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                             <div className="bg-white dark:bg-surface-dark p-8 rounded-[2rem] shadow-soft border border-gray-100 dark:border-gray-800 transition-transform hover:-translate-y-2">
                                 <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 text-primary rounded-2xl flex items-center justify-center mb-6">
                                     <span className="material-icons-round text-3xl">grid_view</span>
@@ -174,6 +174,79 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                 <p className="text-subtext-light dark:text-subtext-dark leading-relaxed">
                                     Instale diretamente no seu aparelho Android ou iPhone e use como um aplicativo nativo, mesmo offline.
                                 </p>
+                            </div>
+                            <div className="bg-white dark:bg-surface-dark p-8 rounded-[2rem] shadow-soft border border-gray-100 dark:border-gray-800 transition-transform hover:-translate-y-2">
+                                <div className="w-14 h-14 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 rounded-2xl flex items-center justify-center mb-6">
+                                    <span className="material-icons-round text-3xl">notifications_active</span>
+                                </div>
+                                <h3 className="text-xl font-bold mb-4">Anti-Procrastinação</h3>
+                                <p className="text-subtext-light dark:text-subtext-dark leading-relaxed">
+                                    Nosso sistema inteligente te avisa se você perder o ritmo, ajudando você a manter a consistência.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Certificate Showcase Section */}
+                <section className="relative z-10 py-20 px-6 overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-900 via-gray-800 to-black -z-20"></div>
+                    <div className="absolute top-0 left-0 w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] -z-10"></div>
+
+                    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 text-white">
+                        <div className="md:w-1/2 text-center md:text-left">
+                            <div className="inline-block px-4 py-1.5 mb-6 rounded-full bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 text-xs font-bold uppercase tracking-widest animate-pulse">
+                                Recompensa Exclusiva
+                            </div>
+                            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                                Celebre cada <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">Conquista</span>
+                            </h2>
+                            <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+                                Ao atingir sua meta, você recebe um <strong>Certificado Oficial</strong> personalizado.
+                                Compartilhe sua vitória nas redes sociais e inspire outros a poupar.
+                            </p>
+                            <button
+                                onClick={onStart}
+                                className="px-8 py-4 bg-white text-gray-900 font-bold rounded-2xl hover:bg-gray-100 transition-colors shadow-lg shadow-white/10 flex items-center justify-center gap-2 mx-auto md:mx-0"
+                            >
+                                <span className="material-icons-round">emoji_events</span>
+                                Quero meu Certificado
+                            </button>
+                        </div>
+
+                        <div className="md:w-1/2 relative group perspective-1000">
+                            {/* Abstract Glow */}
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-yellow-500/30 to-purple-600/30 blur-[80px] rounded-full pointer-events-none"></div>
+
+                            {/* Card Mockup */}
+                            <div className="relative transform rotate-y-12 rotate-x-6 group-hover:rotate-0 transition-all duration-700 ease-out preserve-3d">
+                                <div className="bg-gradient-to-br from-gray-800 via-gray-900 to-black p-1 rounded-3xl shadow-2xl border border-white/10">
+                                    <div className="bg-gray-900 rounded-[1.4rem] p-6 flex flex-col items-center text-center relative overflow-hidden h-[400px] w-[320px] mx-auto">
+                                        {/* Mock Content */}
+                                        <div className="absolute top-[-50px] left-[-50px] w-[150px] h-[150px] bg-primary/20 blur-[60px] rounded-full"></div>
+                                        <div className="flex items-center gap-2 mb-8 opacity-70">
+                                            <span className="material-icons-round text-primary text-sm">savings</span>
+                                            <span className="text-xs font-bold uppercase tracking-widest">Minha Meta</span>
+                                        </div>
+                                        <div className="text-5xl mb-4 text-yellow-500 drop-shadow-lg">🏆</div>
+                                        <h3 className="text-2xl font-black text-white mb-1">META CONCLUÍDA!</h3>
+                                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">Viagem dos Sonhos</p>
+                                        <div className="bg-white/5 w-full py-4 rounded-xl border border-white/5 mb-6">
+                                            <p className="text-[10px] text-gray-400">Total Acumulado</p>
+                                            <p className="text-2xl font-mono font-bold text-primary">R$ 5.000,00</p>
+                                        </div>
+                                        <div className="flex gap-1">
+                                            {[1, 2, 3, 4, 5].map(i => <span key={i} className="material-icons-round text-yellow-500 text-xs">star</span>)}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Floating Badge */}
+                                <div className="absolute -bottom-6 -right-6 bg-white text-gray-900 px-4 py-2 rounded-xl font-bold shadow-xl flex items-center gap-2 animate-bounce cursor-default text-xs">
+                                    <span className="material-icons-round text-instagram text-pink-600">share</span>
+                                    Pronto para Postar
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -251,7 +324,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
                                     <span className="text-subtext-light dark:text-subtext-dark text-sm mb-1.5">Pagamento único</span>
                                 </div>
                                 <ul className="space-y-4 mb-10 text-subtext-light dark:text-subtext-dark text-left w-full">
-                                    <li className="flex items-center gap-2 font-medium text-gray-900 dark:text-white"><span className="material-icons-round text-primary">star</span> Metas Ilimitadas</li>
+                                    <li className="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
+                                        <span className="material-icons-round text-primary">star</span>
+                                        <div>
+                                            Múltiplos Sonhos Simultâneos
+                                            <p className="text-xs text-subtext-light dark:text-subtext-dark font-normal">Junte para o Carro e Viagem ao mesmo tempo.</p>
+                                        </div>
+                                    </li>
                                     <li className="flex items-center gap-2"><span className="material-icons-round text-success">check</span> Estatísticas Avançadas</li>
                                     <li className="flex items-center gap-2"><span className="material-icons-round text-success">check</span> Sem Limite de Dispositivos</li>
                                     <li className="flex items-center gap-2"><span className="material-icons-round text-success">check</span> Suporte Prioritário</li>

@@ -11,6 +11,8 @@ import LandingPage from './components/LandingPage';
 import GoalSelection from './components/GoalSelection';
 import Auth from './components/Auth';
 
+import ReminderSystem from './components/ReminderSystem';
+
 const NavigationHandler: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useSavings();
   const location = useLocation();
@@ -27,7 +29,12 @@ const NavigationHandler: React.FC<{ children: React.ReactNode }> = ({ children }
     return <Auth />;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <ReminderSystem />
+      {children}
+    </>
+  );
 };
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
