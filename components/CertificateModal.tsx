@@ -77,7 +77,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ goalName, totalAmou
 
                         {/* Main Content */}
                         <div className="flex-1 flex flex-col items-center justify-center">
-                            <h1 className="text-3xl font-black mb-2 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">
+                            <h1 className="text-3xl font-black mb-2 leading-tight text-white drop-shadow-md">
                                 META<br />CONCLUÍDA!
                             </h1>
 
